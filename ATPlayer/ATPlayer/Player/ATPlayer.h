@@ -10,4 +10,6 @@
 
 @interface ATPlayer : UIViewController
 
+- (instancetype)initWithContentURL:(NSURL *)contentURL;
+
 @end

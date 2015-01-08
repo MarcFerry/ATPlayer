@@ -12,57 +12,95 @@
 
 @interface ATPlayer ()
 
-@property (nonatomic, strong) AVPlayer *mainPlayer;
+@property (nonatomic, strong) AVPlayer          *player;
+@property (nonatomic, strong) AVPlayerLayer     *playerLayer;
+@property (nonatomic, strong) NSURL             *videoURL;
 
 @end
 
 @implementation ATPlayer
+
+/**************************************************************************************************/
+#pragma mark - Init methods
+
+- (instancetype)initWithContentURL:(NSURL *)contentURL {
+    self.videoURL = contentURL;
+
+    AVAsset *asset = [AVURLAsset URLAssetWithURL:self.videoURL
+                                         options:nil];
+    AVPlayerItem *currentItem = [AVPlayerItem playerItemWithAsset:asset];
+
+    self.player = [AVPlayer playerWithPlayerItem:currentItem];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[self.player currentItem]];
+
+    return self;
+}
+
+/**************************************************************************************************/
+#pragma mark - UIViewController override
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     [self.view setClipsToBounds:YES];
 
-    AVAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"] options:nil];
-//    AVAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST" ofType:@"mp4"]] options:nil];
-    AVPlayerItem *currentItem = [AVPlayerItem playerItemWithAsset:asset];
-
-    self.mainPlayer = [AVPlayer playerWithPlayerItem:currentItem];
-
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                        action:@selector(tappedVideo:)];
     [self.view addGestureRecognizer:tap];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerItemDidReachEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:[self.mainPlayer currentItem]];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-        
-    AVPlayerLayer *avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:self.mainPlayer];
 
-    avPlayerLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:avPlayerLayer];
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
 
-    [self.mainPlayer play];
+    self.playerLayer.frame = self.view.bounds;
+    [self.view.layer addSublayer:self.playerLayer];
+
+    [self.player play];
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+/**************************************************************************************************/
+#pragma mark - Gesture Recognizer
 
 - (void)tappedVideo:(UITapGestureRecognizer *)gesture {
-    if (self.mainPlayer.rate > 0 && !self.mainPlayer.error) {
-        [self.mainPlayer pause];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"cornerRadius"];
+
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+
+    if (self.player.rate > 0 && !self.player.error) {
+        [self.player pause];
+        animation.fromValue = [NSNumber numberWithFloat:0.0f];
+        animation.toValue = [NSNumber numberWithFloat:self.view.bounds.size.height / 2];
     } else {
-        [self.mainPlayer play];
+        [self.player play];
+        animation.fromValue = [NSNumber numberWithFloat:self.view.bounds.size.height / 2];
+        animation.toValue = [NSNumber numberWithFloat:0.0f];
     }
+
+    animation.duration = 0.5;
+
+    [self.view.layer addAnimation:animation forKey:@"cornerRadius"];
 }
+
+/**************************************************************************************************/
+#pragma mark - AVPlayer notification delegate
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
     [p seekToTime:kCMTimeZero];
 
-    [self.mainPlayer play];
+    [self.player play];
 }
 
 @end

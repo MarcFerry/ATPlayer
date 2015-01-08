@@ -35,63 +35,28 @@
 
     self.view.frame = [UIScreen mainScreen].bounds;
 
-    self.player = [[ATPlayer alloc] init];
-    self.player.view.frame = CGRectMake(20, 60, 224, 168);
+    self.player = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+                                                                                                              ofType:@"mp4"]]];
+    self.player.view.frame = CGRectMake(0, 0, 512, 384);
     [self.view addSubview:self.player.view];
 
-    
-    self.player2 = [[ATPlayer alloc] init];
-    self.player2.view.frame = CGRectMake(274, 60, 224, 168);
+
+    self.player2 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+                                                                                                               ofType:@"mp4"]]];
+    self.player2.view.frame = CGRectMake(512, 0, 512, 384);
     [self.view addSubview:self.player2.view];
 
-    
-    self.player3 = [[ATPlayer alloc] init];
-    self.player3.view.frame = CGRectMake(528, 60, 224, 168);
+
+    self.player3 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+                                                                                                               ofType:@"mp4"]]];
+    self.player3.view.frame = CGRectMake(0, 384, 512, 384);
     [self.view addSubview:self.player3.view];
-
     
-    self.player4 = [[ATPlayer alloc] init];
-    self.player4.view.frame = CGRectMake(782, 60, 224, 168);
+    
+    self.player4 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+                                                                                                               ofType:@"mp4"]]];
+    self.player4.view.frame = CGRectMake(512, 384, 512, 384);
     [self.view addSubview:self.player4.view];
-
-    self.player5 = [[ATPlayer alloc] init];
-    self.player5.view.frame = CGRectMake(20, 228, 224, 168);
-    [self.view addSubview:self.player5.view];
-//
-//    
-    self.player6 = [[ATPlayer alloc] init];
-    self.player6.view.frame = CGRectMake(274, 228, 224, 168);
-    [self.view addSubview:self.player6.view];
-//
-//    
-    self.player7 = [[ATPlayer alloc] init];
-    self.player7.view.frame = CGRectMake(528, 228, 224, 168);
-    [self.view addSubview:self.player7.view];
-//
-//    
-    self.player8 = [[ATPlayer alloc] init];
-    self.player8.view.frame = CGRectMake(782, 228, 224, 168);
-    [self.view addSubview:self.player8.view];
-
-//
-//    self.player9 = [[ATPlayer alloc] init];
-//    self.player9.view.frame = CGRectMake(20, 366, 224, 168);
-//    [self.view addSubview:self.player9.view];
-//
-//    
-//    self.player10 = [[ATPlayer alloc] init];
-//    self.player10.view.frame = CGRectMake(274, 564, 224, 168);
-//    [self.view addSubview:self.player10.view];
-//
-//    
-//    self.player11 = [[ATPlayer alloc] init];
-//    self.player11.view.frame = CGRectMake(528, 564, 224, 168);
-//    [self.view addSubview:self.player11.view];
-//
-//    
-//    self.player12 = [[ATPlayer alloc] init];
-//    self.player12.view.frame = CGRectMake(782, 564, 224, 168);
-//    [self.view addSubview:self.player12.view];
 }
 
 
