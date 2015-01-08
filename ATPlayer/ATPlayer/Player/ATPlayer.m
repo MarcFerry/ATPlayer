@@ -21,10 +21,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    AVAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST" ofType:@"mp4"]] options:nil];
+    [self.view setClipsToBounds:YES];
+
+    AVAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"] options:nil];
+//    AVAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST" ofType:@"mp4"]] options:nil];
     AVPlayerItem *currentItem = [AVPlayerItem playerItemWithAsset:asset];
 
     self.mainPlayer = [AVPlayer playerWithPlayerItem:currentItem];
+
+    UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(tappedVideo:)];
+    [self.view addGestureRecognizer:tap];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
@@ -37,10 +44,18 @@
         
     AVPlayerLayer *avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:self.mainPlayer];
 
-    avPlayerLayer.frame = CGRectMake(0, 0, 1024, 748);
+    avPlayerLayer.frame = self.view.bounds;
     [self.view.layer addSublayer:avPlayerLayer];
 
     [self.mainPlayer play];
+}
+
+- (void)tappedVideo:(UITapGestureRecognizer *)gesture {
+    if (self.mainPlayer.rate > 0 && !self.mainPlayer.error) {
+        [self.mainPlayer pause];
+    } else {
+        [self.mainPlayer play];
+    }
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
