@@ -12,9 +12,13 @@
 
 @interface ATPlayer ()
 
+@property (weak, nonatomic) IBOutlet UIView     *containerView;
+@property (weak, nonatomic) IBOutlet UILabel    *centerLabel;
+
 @property (nonatomic, strong) AVPlayer          *player;
 @property (nonatomic, strong) AVPlayerLayer     *playerLayer;
 @property (nonatomic, strong) NSURL             *videoURL;
+@property (nonatomic, strong) NSTimer           *myTimer;
 
 @end
 
@@ -46,22 +50,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.view setClipsToBounds:YES];
+    [self.containerView setClipsToBounds:YES];
 
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                        action:@selector(tappedVideo:)];
     [self.view addGestureRecognizer:tap];
+
+    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                    target:self
+                                                  selector:@selector(displayMyCurrentTime:)
+                                                  userInfo:nil
+                                                   repeats:YES];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    
+    self.playerLayer.zPosition = -1;
+    self.containerView.layer.sublayers = nil;
+    [self.containerView.layer addSublayer:self.playerLayer];
+
+    [self.player play];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-
     self.playerLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:self.playerLayer];
-
-    [self.player play];
 }
 
 - (void)dealloc {
@@ -80,17 +98,36 @@
 
     if (self.player.rate > 0 && !self.player.error) {
         [self.player pause];
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.view.backgroundColor = [UIColor blackColor];
+                         }];
         animation.fromValue = [NSNumber numberWithFloat:0.0f];
         animation.toValue = [NSNumber numberWithFloat:self.view.bounds.size.height / 2];
     } else {
         [self.player play];
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.view.backgroundColor = [UIColor lightGrayColor];
+                         }];
         animation.fromValue = [NSNumber numberWithFloat:self.view.bounds.size.height / 2];
         animation.toValue = [NSNumber numberWithFloat:0.0f];
     }
 
     animation.duration = 0.5;
 
-    [self.view.layer addAnimation:animation forKey:@"cornerRadius"];
+    [self.containerView.layer addAnimation:animation forKey:@"cornerRadius"];
+}
+
+/**************************************************************************************************/
+#pragma mark - Timer delegate
+
+- (void)displayMyCurrentTime:(NSTimer *)timer {
+    self.centerLabel.text = [NSString stringWithFormat:@"%02d:%02d / %02d:%02d",
+                             (int)CMTimeGetSeconds([self.player.currentItem currentTime]) / 60,
+                             (int)CMTimeGetSeconds([self.player.currentItem currentTime]) % 60,
+                             (int)CMTimeGetSeconds([self.player.currentItem duration]) / 60,
+                             (int)CMTimeGetSeconds([self.player.currentItem duration]) % 60];
 }
 
 /**************************************************************************************************/

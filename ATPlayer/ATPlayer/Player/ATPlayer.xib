@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ATPlayer">
             <connections>
+                <outlet property="centerLabel" destination="cxS-sT-vF9" id="XiM-TB-bAq"/>
+                <outlet property="containerView" destination="SX0-2J-rKy" id="poQ-Fg-jxn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +15,28 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SX0-2J-rKy">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-sT-vF9">
+                    <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="SX0-2J-rKy" secondAttribute="bottom" id="30a-xi-AkP"/>
+                <constraint firstAttribute="trailing" secondItem="cxS-sT-vF9" secondAttribute="trailing" constant="20" id="Eor-3V-xR9"/>
+                <constraint firstItem="SX0-2J-rKy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FSK-bb-rXG"/>
+                <constraint firstItem="cxS-sT-vF9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="dZr-3G-3kJ"/>
+                <constraint firstItem="SX0-2J-rKy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sbA-Nw-Pl1"/>
+                <constraint firstAttribute="bottom" secondItem="cxS-sT-vF9" secondAttribute="bottom" constant="20" id="swy-oB-TEc"/>
+                <constraint firstAttribute="trailing" secondItem="SX0-2J-rKy" secondAttribute="trailing" id="upD-ED-fAU"/>
+            </constraints>
+            <point key="canvasLocation" x="431" y="314"/>
         </view>
     </objects>
 </document>
