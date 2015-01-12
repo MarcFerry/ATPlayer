@@ -16,6 +16,7 @@
 		490226CE1A5E880E00E54292 /* TEST.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 490226CB1A5E873D00E54292 /* TEST.mp4 */; };
 		490226D81A5E8A9F00E54292 /* ATPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 490226D61A5E8A9F00E54292 /* ATPlayer.m */; };
 		490226D91A5E8A9F00E54292 /* ATPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 490226D71A5E8A9F00E54292 /* ATPlayer.xib */; };
+		494C1EF11A63CEAA003E0240 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 494C1EF01A63CEAA003E0240 /* test.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		490226D51A5E8A9F00E54292 /* ATPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATPlayer.h; sourceTree = "<group>"; };
 		490226D61A5E8A9F00E54292 /* ATPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATPlayer.m; sourceTree = "<group>"; };
 		490226D71A5E8A9F00E54292 /* ATPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ATPlayer.xib; sourceTree = "<group>"; };
+		494C1EF01A63CEAA003E0240 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		490226A51A5E86B900E54292 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				494C1EF01A63CEAA003E0240 /* test.png */,
 				490226CB1A5E873D00E54292 /* TEST.mp4 */,
 				490226A61A5E86B900E54292 /* Info.plist */,
 				490226A71A5E86B900E54292 /* main.m */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				490226CD1A5E87DE00E54292 /* ATViewController.xib in Resources */,
+				494C1EF11A63CEAA003E0240 /* test.png in Resources */,
 				490226B31A5E86B900E54292 /* Images.xcassets in Resources */,
 				490226CE1A5E880E00E54292 /* TEST.mp4 in Resources */,
 				490226D91A5E8A9F00E54292 /* ATPlayer.xib in Resources */,
@@ -413,6 +417,7 @@
 				490226C71A5E86B900E54292 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		490226C81A5E86B900E54292 /* Build configuration list for PBXNativeTarget "ATPlayerTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				490226CA1A5E86B900E54292 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

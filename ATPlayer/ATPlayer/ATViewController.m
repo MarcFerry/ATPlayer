@@ -37,7 +37,8 @@
 
     self.player = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
                                                                                                               ofType:@"mp4"]]];
-    self.player.view.frame = CGRectMake(0, 0, 512, 384);
+//    self.player.displayCurrentTime = NO;
+//    self.player.displaySeekBar = NO;
     [self.view addSubview:self.player.view];
 
 
@@ -57,6 +58,12 @@
 //                                                                                                               ofType:@"mp4"]]];
 //    self.player4.view.frame = CGRectMake(512, 384, 512, 384);
 //    [self.view addSubview:self.player4.view];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    self.player.view.frame = self.view.bounds;
 }
 
 

@@ -20,6 +20,10 @@
 @property (nonatomic, strong) NSURL             *videoURL;
 @property (nonatomic, strong) NSTimer           *myTimer;
 
+- (IBAction)seekTo:(id)sender;
+- (IBAction)beginSeeking:(id)sender;
+- (IBAction)endSeeking:(id)sender;
+
 @end
 
 @implementation ATPlayer
@@ -36,6 +40,7 @@
 
     self.player = [AVPlayer playerWithPlayerItem:currentItem];
     self.displayCurrentTime = YES;
+    self.displaySeekBar = YES;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
@@ -63,10 +68,13 @@
                                                   userInfo:nil
                                                    repeats:YES];
 
+    [self.seekSlider setThumbImage:[UIImage imageNamed:@"test"] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    self.seekSlider.hidden = !self.displaySeekBar;
 
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     

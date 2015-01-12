@@ -13,10 +13,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *seekSlider;
 
 @property (assign) BOOL displayCurrentTime;
-
-- (IBAction)seekTo:(id)sender;
-- (IBAction)beginSeeking:(id)sender;
-- (IBAction)endSeeking:(id)sender;
+@property (assign) BOOL displaySeekBar;
 
 - (instancetype)initWithContentURL:(NSURL *)contentURL;
 - (void)seekToTime:(NSInteger)time;
