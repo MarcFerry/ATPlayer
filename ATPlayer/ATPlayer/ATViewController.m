@@ -41,22 +41,22 @@
     [self.view addSubview:self.player.view];
 
 
-    self.player2 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
-                                                                                                               ofType:@"mp4"]]];
-    self.player2.view.frame = CGRectMake(512, 0, 512, 384);
-    [self.view addSubview:self.player2.view];
-
-
-    self.player3 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
-                                                                                                               ofType:@"mp4"]]];
-    self.player3.view.frame = CGRectMake(0, 384, 512, 384);
-    [self.view addSubview:self.player3.view];
-    
-    
-    self.player4 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
-                                                                                                               ofType:@"mp4"]]];
-    self.player4.view.frame = CGRectMake(512, 384, 512, 384);
-    [self.view addSubview:self.player4.view];
+//    self.player2 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+//                                                                                                               ofType:@"mp4"]]];
+//    self.player2.view.frame = CGRectMake(512, 0, 512, 384);
+//    [self.view addSubview:self.player2.view];
+//
+//
+//    self.player3 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+//                                                                                                               ofType:@"mp4"]]];
+//    self.player3.view.frame = CGRectMake(0, 384, 512, 384);
+//    [self.view addSubview:self.player3.view];
+//    
+//    
+//    self.player4 = [[ATPlayer alloc] initWithContentURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"TEST"
+//                                                                                                               ofType:@"mp4"]]];
+//    self.player4.view.frame = CGRectMake(512, 384, 512, 384);
+//    [self.view addSubview:self.player4.view];
 }
 
 

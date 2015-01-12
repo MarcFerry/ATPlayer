@@ -35,6 +35,7 @@
     AVPlayerItem *currentItem = [AVPlayerItem playerItemWithAsset:asset];
 
     self.player = [AVPlayer playerWithPlayerItem:currentItem];
+    self.displayCurrentTime = YES;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
@@ -54,9 +55,9 @@
 
     UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                        action:@selector(tappedVideo:)];
-    [self.view addGestureRecognizer:tap];
+    [self.containerView addGestureRecognizer:tap];
 
-    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                     target:self
                                                   selector:@selector(displayMyCurrentTime:)
                                                   userInfo:nil
@@ -123,11 +124,40 @@
 #pragma mark - Timer delegate
 
 - (void)displayMyCurrentTime:(NSTimer *)timer {
-    self.centerLabel.text = [NSString stringWithFormat:@"%02d:%02d / %02d:%02d",
+    if (self.displayCurrentTime) {
+        self.centerLabel.text = [NSString stringWithFormat:@"%02d:%02d / %02d:%02d",
                              (int)CMTimeGetSeconds([self.player.currentItem currentTime]) / 60,
                              (int)CMTimeGetSeconds([self.player.currentItem currentTime]) % 60,
                              (int)CMTimeGetSeconds([self.player.currentItem duration]) / 60,
                              (int)CMTimeGetSeconds([self.player.currentItem duration]) % 60];
+    }
+
+    if (!self.seekSlider.highlighted) {
+        [self.seekSlider setValue:(float)[self.player.currentItem currentTime].value / (float)[self.player.currentItem currentTime].timescale / CMTimeGetSeconds([self.player.currentItem duration])];
+    }
+}
+
+/**************************************************************************************************/
+#pragma mark - Player actions
+
+- (IBAction)seekTo:(id)sender {
+    [self seekToTime:[(UISlider *)sender value] * CMTimeGetSeconds([self.player.currentItem duration]) withTolerance:kCMTimeZero];
+}
+
+- (IBAction)beginSeeking:(id)sender {
+    [self.player pause];
+}
+
+- (IBAction)endSeeking:(id)sender {
+    [self.player play];
+}
+
+- (void)seekToTime:(NSInteger)time {
+    [self.player seekToTime:CMTimeMake(time, 1)];
+}
+
+- (void)seekToTime:(NSInteger)time withTolerance:(CMTime)timeTolerance {
+    [self.player seekToTime:CMTimeMake(time, 1) toleranceBefore:timeTolerance toleranceAfter:timeTolerance];
 }
 
 /**************************************************************************************************/
