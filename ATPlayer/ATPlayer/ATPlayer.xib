@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ATPlayer">
+            <connections>
+                <outlet property="containerView" destination="SX0-2J-rKy" id="poQ-Fg-jxn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SX0-2J-rKy" customClass="ATPlayerView">
+                    <rect key="frame" x="0.0" y="60" width="600" height="480"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxS-sT-vF9">
+                    <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="RQH-mS-yLL">
+                    <rect key="frame" x="8" y="565" width="584" height="31"/>
+                    <connections>
+                        <action selector="beginSeeking:" destination="-1" eventType="touchDown" id="m9r-k6-2aO"/>
+                        <action selector="endSeeking:" destination="-1" eventType="touchUpOutside" id="0CJ-sv-WP3"/>
+                        <action selector="endSeeking:" destination="-1" eventType="touchUpInside" id="oJM-qq-m6g"/>
+                        <action selector="seekTo:" destination="-1" eventType="valueChanged" id="sXN-Bc-tpK"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ncc-HK-37Y">
+                    <rect key="frame" x="277" y="10" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="clickPIP:" destination="-1" eventType="touchUpInside" id="P1L-S4-ipK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="SX0-2J-rKy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0OS-jy-lms"/>
+                <constraint firstItem="SX0-2J-rKy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="3DC-yG-flh"/>
+                <constraint firstItem="cxS-sT-vF9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="3IL-5a-Ok0"/>
+                <constraint firstItem="RQH-mS-yLL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Edv-H9-zfr"/>
+                <constraint firstAttribute="bottom" secondItem="SX0-2J-rKy" secondAttribute="bottom" constant="60" id="FaH-4Y-mbG"/>
+                <constraint firstAttribute="trailing" secondItem="SX0-2J-rKy" secondAttribute="trailing" id="PED-nI-1Wf"/>
+                <constraint firstItem="cxS-sT-vF9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Pi1-5w-YeS"/>
+                <constraint firstAttribute="trailing" secondItem="cxS-sT-vF9" secondAttribute="trailing" constant="20" id="Pqs-Jc-LW5"/>
+                <constraint firstItem="Ncc-HK-37Y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WeP-Ps-EWO"/>
+                <constraint firstAttribute="bottom" secondItem="RQH-mS-yLL" secondAttribute="bottom" constant="5" id="cSL-7Y-x2N"/>
+                <constraint firstAttribute="trailing" secondItem="RQH-mS-yLL" secondAttribute="trailing" constant="10" id="hyK-aw-IPL"/>
+                <constraint firstItem="Ncc-HK-37Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="r8k-ka-pl2"/>
+            </constraints>
+            <point key="canvasLocation" x="203" y="-50"/>
+        </view>
+    </objects>
+</document>
