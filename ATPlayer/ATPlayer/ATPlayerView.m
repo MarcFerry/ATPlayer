@@ -29,7 +29,7 @@
 
 - (void)setPlayer:(AVPlayer *)player {
     [(AVPlayerLayer *)[self layer] setPlayer:player];
-    [(AVPlayerLayer *)[self layer] setVideoGravity:AVLayerVideoGravityResize];
+    [(AVPlayerLayer *)[self layer] setVideoGravity:AVLayerVideoGravityResizeAspect];
     // Force audio in mute mode
     NSError *error = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback

@@ -239,28 +239,24 @@
 
     if ([AVPictureInPictureController isPictureInPictureSupported] && self.pipVC.isPictureInPicturePossible) {
         [self.pipVC startPictureInPicture];
-        [self.pipVC stopPictureInPicture];
     }
 }
 
 - (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"PONG");
 }
 
 - (void)pictureInPictureControllerDidStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"PONG");
 }
 
 - (void)pictureInPictureControllerFailedToStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController withError:(NSError *)error {
-    NSLog(@"%@", error);
 }
 
 - (void)pictureInPictureControllerDidStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    NSLog(@"PONG");
 }
 
 - (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler {
-    NSLog(@"PONG");
+    [self.pipVC stopPictureInPicture];
+    completionHandler(YES);
 }
 
 /**************************************************************************************************/
